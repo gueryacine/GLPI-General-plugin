@@ -28,7 +28,7 @@
  * -------------------------------------------------------------------------
  */
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 use NotificationTarget;
 
@@ -42,6 +42,6 @@ class NotificationTargetExample extends NotificationTarget
 
     public function addDataForTemplate($event, $options = [])
     {
-        $this->data['##example.name##'] = __s('Example', 'example');
+        $this->data['##example.name##'] = __s('Example', 'glpigeneral');
     }
 }

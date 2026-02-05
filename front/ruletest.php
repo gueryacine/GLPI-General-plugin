@@ -33,7 +33,7 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-use GlpiPlugin\Example\RuleTestCollection;
+use GlpiPlugin\Glpigeneral\RuleTestCollection;
 
 include(__DIR__ . '/../bootstrap.php');
 Session::checkLoginUser();

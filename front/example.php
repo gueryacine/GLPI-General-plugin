@@ -33,7 +33,7 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-use GlpiPlugin\Example\Example;
+use GlpiPlugin\Glpigeneral\Example;
 
 include(__DIR__ . '/../bootstrap.php');
 Session::checkRight(Example::$rightname, READ);

@@ -42,8 +42,8 @@ include(__DIR__ . '/../bootstrap.php');
 Session::checkRight('config', UPDATE);
 
 // To be available when plugin in not activated
-Plugin::load('example');
+Plugin::load('glpigeneral');
 
 Html::header('TITRE', $_SERVER['PHP_SELF'], 'config', 'plugins');
-echo __s('This is the plugin config page', 'example');
+echo __s('This is the plugin config page', 'glpigeneral');
 Html::footer();

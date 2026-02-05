@@ -28,7 +28,7 @@
  * -------------------------------------------------------------------------
  */
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 use CommonDBTM;
 use CommonGLPI;
@@ -66,17 +66,25 @@ class Config extends CommonDBTM
             return false;
         }
 
-        $my_config = GlpiConfig::getConfigurationValues('plugin:Example');
+        $my_config = GlpiConfig::getConfigurationValues('plugin:Glpigeneral');
 
         echo "<form name='form' action=\"" . Toolbox::getItemTypeFormURL('Config') . "\" method='post'>";
         echo "<div class='center' id='tabsbody'>";
         echo "<table class='tab_cadre_fixe'>";
         echo "<tr><th colspan='4'>" . __s('Example setup') . '</th></tr>';
-        echo '<td >' . __s('My boolean choice :') . '</td>';
+
+        echo '<tr class="tab_bg_1">';
+        echo '<td>' . __s('My boolean choice:', 'glpigeneral') . '</td>';
         echo "<td colspan='3'>";
         echo "<input type='hidden' name='config_class' value='" . self::class . "'>";
-        echo "<input type='hidden' name='config_context' value='plugin:Example'>";
+        echo "<input type='hidden' name='config_context' value='plugin:Glpigeneral'>";
         Dropdown::showYesNo('configuration', $my_config['configuration']);
+        echo '</td></tr>';
+
+        echo '<tr class="tab_bg_1">';
+        echo '<td>' . __s('Show server information on profiles:', 'glpigeneral') . '</td>';
+        echo "<td colspan='3'>";
+        Dropdown::showYesNo('show_server_info', $my_config['show_server_info'] ?? 1);
         echo '</td></tr>';
 
         echo "<tr class='tab_bg_2'>";

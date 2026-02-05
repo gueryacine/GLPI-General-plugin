@@ -55,7 +55,7 @@
  *
  */
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 use Glpi\Exception\Http\NotFoundHttpException;
 use Glpi\Exception\Http\HttpException;

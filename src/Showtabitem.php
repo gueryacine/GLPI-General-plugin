@@ -28,10 +28,10 @@
  * -------------------------------------------------------------------------
  */
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 /**
- * Summary of GlpiPlugin\Example\Showtabitem
+ * Summary of GlpiPlugin\Glpigeneral\Showtabitem
  * Example of pre_show_xxx and post_show_xxx implementation
  *
  *

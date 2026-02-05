@@ -33,7 +33,7 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 use Rule;
 
@@ -73,7 +73,7 @@ class RuleTest extends Rule
     public function getActions()
     {
         $actions                                   = [];
-        $actions['softwarecategories_id']['name']  = __s('Category (class)', 'example');
+        $actions['softwarecategories_id']['name']  = __s('Category (class)', 'glpigeneral');
         $actions['softwarecategories_id']['type']  = 'dropdown';
         $actions['softwarecategories_id']['table'] = 'glpi_softwarecategories';
 

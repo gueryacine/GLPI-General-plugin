@@ -33,7 +33,7 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 use CommonDropdown;
 
@@ -43,9 +43,9 @@ class Dropdown extends CommonDropdown
     public static function getTypeName($nb = 0)
     {
         if ($nb > 0) {
-            return __s('Plugin Example Dropdowns', 'example');
+            return __s('Plugin Example Dropdowns', 'glpigeneral');
         }
 
-        return __s('Plugin Example Dropdowns', 'example');
+        return __s('Plugin Example Dropdowns', 'glpigeneral');
     }
 }

@@ -35,9 +35,9 @@
 
 // Class of the defined type
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
-use GlpiPlugin\Example\DeviceCamera;
+use GlpiPlugin\Glpigeneral\DeviceCamera;
 use Item_Devices;
 
 /**
@@ -46,7 +46,7 @@ use Item_Devices;
 class Item_DeviceCamera extends Item_Devices
 {
     public static $itemtype_2 = DeviceCamera::class;
-    public static $items_id_2 = 'plugin_example_devicecameras_id';
+    public static $items_id_2 = 'plugin_glpigeneral_devicecameras_id';
 
     protected static $notable = false;
 }

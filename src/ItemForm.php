@@ -28,14 +28,14 @@
  * -------------------------------------------------------------------------
  */
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 use Glpi\Application\View\TemplateRenderer;
 use Html;
 use Ticket;
 
 /**
- * Summary of GlpiPlugin\Example\ItemForm
+ * Summary of GlpiPlugin\Glpigeneral\ItemForm
  * Example of *_item_form implementation
  * @see http://glpi-developer-documentation.rtfd.io/en/master/plugins/hooks.html#items-display-related
  * */

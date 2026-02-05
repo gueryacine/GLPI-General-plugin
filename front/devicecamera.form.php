@@ -33,7 +33,7 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-use GlpiPlugin\Example\DeviceCamera;
+use GlpiPlugin\Glpigeneral\DeviceCamera;
 
 include(__DIR__ . '/../bootstrap.php');
 Session::checkLoginUser();

@@ -33,7 +33,7 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 use Central;
 use CommonDBTM;
@@ -75,7 +75,7 @@ class Example extends CommonDBTM
 
         $links['config']                                                                                                                         = '/plugins/example/index.php';
         $links["<img  src='" . $CFG_GLPI['root_doc'] . "/pics/menu_showall.png' title='" . __s('Show all') . "' alt='" . __s('Show all') . "'>"] = '/plugins/example/index.php';
-        $links[__s('Test link', 'example')]                                                                                                      = '/plugins/example/index.php';
+        $links[__s('Test link', 'glpigeneral')]                                                                                                      = '/plugins/example/index.php';
 
         return $links;
     }
@@ -119,21 +119,21 @@ class Example extends CommonDBTM
 
         $tab[] = [
             'id'    => '1',
-            'table' => 'glpi_plugin_example_examples',
+            'table' => 'glpi_plugin_glpigeneral_examples',
             'field' => 'name',
             'name'  => __s('Name'),
         ];
 
         $tab[] = [
             'id'    => '2',
-            'table' => 'glpi_plugin_example_dropdowns',
+            'table' => 'glpi_plugin_glpigeneral_dropdowns',
             'field' => 'name',
             'name'  => __s('Dropdown'),
         ];
 
         $tab[] = [
             'id'         => '3',
-            'table'      => 'glpi_plugin_example_examples',
+            'table'      => 'glpi_plugin_glpigeneral_examples',
             'field'      => 'serial',
             'name'       => __s('Serial number'),
             'usehaving'  => true,
@@ -142,7 +142,7 @@ class Example extends CommonDBTM
 
         $tab[] = [
             'id'         => '30',
-            'table'      => 'glpi_plugin_example_examples',
+            'table'      => 'glpi_plugin_glpigeneral_examples',
             'field'      => 'id',
             'name'       => __s('ID'),
             'usehaving'  => true,
@@ -163,8 +163,8 @@ class Example extends CommonDBTM
     {
         switch ($name) {
             case 'Sample':
-                return ['description' => __s('Cron description for example', 'example'),
-                    'parameter'       => __s('Cron parameter for example', 'example')];
+                return ['description' => __s('Cron description for example', 'glpigeneral'),
+                    'parameter'       => __s('Cron parameter for example', 'glpigeneral')];
         }
 
         return [];
@@ -221,23 +221,23 @@ class Example extends CommonDBTM
         if (!$withtemplate) {
             if ($item instanceof Profile) {
                 if ($item->getField('central')) {
-                    return __s('Example', 'example');
+                    return __s('Example', 'glpigeneral');
                 }
 
             } elseif ($item instanceof Phone) {
                 if ($_SESSION['glpishow_count_on_tabs']) {
                     return self::createTabEntry(
-                        __s('Example', 'example'),
+                        __s('Example', 'glpigeneral'),
                         countElementsInTable($this->getTable()),
                     );
                 }
 
-                return __s('Example', 'example');
+                return __s('Example', 'glpigeneral');
 
             } elseif ($item instanceof Item_Disk || $item instanceof Supplier) {
                 return [
-                    1 => __s('Test Plugin', 'example'),
-                    2 => __s('Test Plugin 2', 'example'),
+                    1 => __s('Test Plugin', 'glpigeneral'),
+                    2 => __s('Test Plugin 2', 'glpigeneral'),
                 ];
 
             } elseif ($item instanceof Computer
@@ -245,7 +245,7 @@ class Example extends CommonDBTM
                     || $item instanceof Preference
                     || $item instanceof Notification) {
                 return [
-                    1 => __s('Test Plugin', 'example'),
+                    1 => __s('Test Plugin', 'glpigeneral'),
                 ];
             }
         }
@@ -256,10 +256,10 @@ class Example extends CommonDBTM
     public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
     {
         if ($item instanceof Phone) {
-            echo __s('Plugin Example on Phone', 'example');
+            echo __s('Plugin Example on Phone', 'glpigeneral');
 
         } elseif ($item instanceof Central) {
-            echo __s('Plugin central action', 'example');
+            echo __s('Plugin central action', 'glpigeneral');
 
         } elseif ($item instanceof Preference) {
             // Complete form display
@@ -280,18 +280,18 @@ class Example extends CommonDBTM
             echo '</form>';
 
         } elseif ($item instanceof Notification) {
-            echo __s('Plugin mailing action', 'example');
+            echo __s('Plugin mailing action', 'glpigeneral');
 
         } elseif ($item instanceof Item_Disk || $item instanceof Supplier) {
             if ($tabnum == 1) {
-                echo __s('First tab of Plugin example', 'example');
+                echo __s('First tab of Plugin example', 'glpigeneral');
             } else {
-                echo __s('Second tab of Plugin example', 'example');
+                echo __s('Second tab of Plugin example', 'glpigeneral');
             }
 
         } else {
             //TRANS: %1$s is a class name, %2$d is an item ID
-            printf(__s('Plugin example CLASS=%1$s', 'example'), get_class($item));
+            printf(__s('Plugin example CLASS=%1$s', 'glpigeneral'), get_class($item));
         }
 
 
@@ -322,7 +322,7 @@ class Example extends CommonDBTM
         $key                   = $parm['begin'] . '$$$' . 'plugin_example1';
         $output[$key]['begin'] = date('Y-m-d 17:00:00');
         $output[$key]['end']   = date('Y-m-d 18:00:00');
-        $output[$key]['name']  = __s('test planning example 1', 'example');
+        $output[$key]['name']  = __s('test planning example 1', 'glpigeneral');
         // Specify the itemtype to be able to use specific display system
         $output[$key]['itemtype'] = Example::class;
         // Set the ID using the ID of the item in the database to have unique ID
@@ -386,7 +386,7 @@ class Example extends CommonDBTM
     {
         switch ($data['linked_action'] - Log::HISTORY_PLUGIN) {
             case 0:
-                return __s('History from plugin example', 'example');
+                return __s('History from plugin example', 'glpigeneral');
         }
 
         return '';
@@ -399,7 +399,7 @@ class Example extends CommonDBTM
         $actions = parent::getSpecificMassiveActions($checkitem);
 
         $actions['Document_Item' . MassiveAction::CLASS_ACTION_SEPARATOR . 'add']  = _x('button', 'Add a document');         // GLPI core one
-        $actions[self::class . MassiveAction::CLASS_ACTION_SEPARATOR . 'do_nothing'] = __s('Do Nothing - just for fun', 'example');  // Specific one
+        $actions[self::class . MassiveAction::CLASS_ACTION_SEPARATOR . 'do_nothing'] = __s('Do Nothing - just for fun', 'glpigeneral');  // Specific one
 
         return $actions;
     }
@@ -410,12 +410,12 @@ class Example extends CommonDBTM
             case 'DoIt':
                 echo "&nbsp;<input type='hidden' name='toto' value='1'>" .
                      Html::submit(_x('button', 'Post'), ['name' => 'massiveaction']) .
-                     ' ' . __s('Write in item history', 'example');
+                     ' ' . __s('Write in item history', 'glpigeneral');
 
                 return true;
             case 'do_nothing':
                 echo '&nbsp;' . Html::submit(_x('button', 'Post'), ['name' => 'massiveaction']) .
-                     ' ' . __s('but do nothing :)', 'example');
+                     ' ' . __s('but do nothing :)', 'glpigeneral');
 
                 return true;
         }
@@ -438,8 +438,8 @@ class Example extends CommonDBTM
         switch ($ma->getAction()) {
             case 'DoIt':
                 if ($item->getType() == 'Computer') {
-                    Session::addMessageAfterRedirect(__s('Right it is the type I want...', 'example'));
-                    Session::addMessageAfterRedirect(__s('Write in item history', 'example'));
+                    Session::addMessageAfterRedirect(__s('Right it is the type I want...', 'glpigeneral'));
+                    Session::addMessageAfterRedirect(__s('Write in item history', 'glpigeneral'));
                     $changes = [0, 'old value', 'new value'];
                     foreach ($ids as $id) {
                         if ($item->getFromDB($id)) {
@@ -466,10 +466,10 @@ class Example extends CommonDBTM
 
             case 'do_nothing':
                 if ($item->getType() == Example::class) {
-                    Session::addMessageAfterRedirect(__s('Right it is the type I want...', 'example'));
+                    Session::addMessageAfterRedirect(__s('Right it is the type I want...', 'glpigeneral'));
                     Session::addMessageAfterRedirect(__s(
                         'But... I say I will do nothing for:',
-                        'example',
+                        'glpigeneral',
                     ));
                     foreach ($ids as $id) {
                         if ($item->getFromDB($id)) {
@@ -503,13 +503,13 @@ class Example extends CommonDBTM
     public static function dashboardTypes()
     {
         return [
-            'example' => [
-                'label'    => __s('Plugin Example', 'example'),
+            'glpigeneral' => [
+                'label'    => __s('Plugin Example', 'glpigeneral'),
                 'function' => Example::class . '::cardWidget',
                 'image'    => 'https://via.placeholder.com/100x86?text=example',
             ],
             'example_static' => [
-                'label'    => __s('Plugin Example (static)', 'example'),
+                'label'    => __s('Plugin Example (static)', 'glpigeneral'),
                 'function' => Example::class . '::cardWidgetWithoutProvider',
                 'image'    => 'https://via.placeholder.com/100x86?text=example+static',
             ],
@@ -522,16 +522,16 @@ class Example extends CommonDBTM
             $cards = [];
         }
         $new_cards = [
-            'plugin_example_card' => [
-                'widgettype' => ['example'],
+            'plugin_glpigeneral_card' => [
+                'widgettype' => ['glpigeneral'],
                 'label'      => __s('Plugin Example card'),
                 'provider'   => Example::class . '::cardDataProvider',
             ],
-            'plugin_example_card_without_provider' => [
+            'plugin_glpigeneral_card_without_provider' => [
                 'widgettype' => ['example_static'],
                 'label'      => __s('Plugin Example card without provider'),
             ],
-            'plugin_example_card_with_core_widget' => [
+            'plugin_glpigeneral_card_with_core_widget' => [
                 'widgettype' => ['bigNumber'],
                 'label'      => __s('Plugin Example card with core provider'),
                 'provider'   => Example::class . '::cardBigNumberProvider',

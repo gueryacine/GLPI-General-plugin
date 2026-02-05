@@ -28,7 +28,7 @@
  * -------------------------------------------------------------------------
  */
 
-namespace GlpiPlugin\Example\Filters;
+namespace GlpiPlugin\Glpigeneral\Filters;
 
 use ComputerModel;
 use DBmysql;
@@ -43,7 +43,7 @@ class ComputerModelFilter extends AbstractFilter
 
     public static function getId(): string
     {
-        return 'plugin_example_computer_model';
+        return 'plugin_glpigeneral_computer_model';
     }
 
     public static function canBeApplied(string $table): bool

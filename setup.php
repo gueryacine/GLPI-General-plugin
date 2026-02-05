@@ -28,26 +28,26 @@
  * -------------------------------------------------------------------------
  */
 use Glpi\Plugin\Hooks;
-use GlpiPlugin\Example\About;
-use GlpiPlugin\Example\Computer;
-use GlpiPlugin\Example\Config;
-use GlpiPlugin\Example\DeviceCamera;
-use GlpiPlugin\Example\Dropdown;
-use GlpiPlugin\Example\Example;
-use GlpiPlugin\Example\Filters\ComputerModelFilter;
-use GlpiPlugin\Example\ItemForm;
-use GlpiPlugin\Example\Profile;
-use GlpiPlugin\Example\RuleTestCollection;
-use GlpiPlugin\Example\Showtabitem;
+use GlpiPlugin\Glpigeneral\About;
+use GlpiPlugin\Glpigeneral\Computer;
+use GlpiPlugin\Glpigeneral\Config;
+use GlpiPlugin\Glpigeneral\DeviceCamera;
+use GlpiPlugin\Glpigeneral\Dropdown;
+use GlpiPlugin\Glpigeneral\Example;
+use GlpiPlugin\Glpigeneral\Filters\ComputerModelFilter;
+use GlpiPlugin\Glpigeneral\ItemForm;
+use GlpiPlugin\Glpigeneral\Profile;
+use GlpiPlugin\Glpigeneral\RuleTestCollection;
+use GlpiPlugin\Glpigeneral\Showtabitem;
 
 use function Safe\define;
 
-define('PLUGIN_EXAMPLE_VERSION', '0.1.0');
+define('PLUGIN_GLPIGENERAL_VERSION', '0.1.0');
 
 // Minimal GLPI version, inclusive
-define('PLUGIN_EXAMPLE_MIN_GLPI', '11.0.0');
+define('PLUGIN_GLPIGENERAL_MIN_GLPI', '11.0.0');
 // Maximum GLPI version, exclusive
-define('PLUGIN_EXAMPLE_MAX_GLPI', '11.0.99');
+define('PLUGIN_GLPIGENERAL_MAX_GLPI', '11.0.99');
 
 /**
  * Init hooks of the plugin.
@@ -96,101 +96,101 @@ function plugin_init_example()
     Plugin::registerClass(Profile::class, ['addtabon' => ['Profile']]);
     Plugin::registerClass(About::class, ['addtabon' => ['Profile']]);
     if (Example::canView()) { // Right set in change_profile hook
-        $PLUGIN_HOOKS['menu_toadd']['example'] = ['plugins' => Example::class,
+        $PLUGIN_HOOKS['menu_toadd']['glpigeneral'] = ['plugins' => Example::class,
             'tools'                                         => Example::class];
 
         // Old menu style
-        //       $PLUGIN_HOOKS['menu_entry']['example'] = 'front/example.php';
+        //       $PLUGIN_HOOKS['menu_entry']['glpigeneral'] = 'front/example.php';
         //
-        //       $PLUGIN_HOOKS['submenu_entry']['example']['options']['optionname']['title'] = "Search";
-        //       $PLUGIN_HOOKS['submenu_entry']['example']['options']['optionname']['page']  = '/plugins/example/front/example.php';
-        //       $PLUGIN_HOOKS['submenu_entry']['example']['options']['optionname']['links']['search'] = '/plugins/example/front/example.php';
-        //       $PLUGIN_HOOKS['submenu_entry']['example']['options']['optionname']['links']['add']    = '/plugins/example/front/example.form.php';
-        //       $PLUGIN_HOOKS['submenu_entry']['example']['options']['optionname']['links']['config'] = '/plugins/example/index.php';
-        //       $PLUGIN_HOOKS['submenu_entry']['example']['options']['optionname']['links']["<img  src='".$CFG_GLPI["root_doc"]."/pics/menu_showall.png' title='".__s('Show all')."' alt='".__s('Show all')."'>"] = '/plugins/example/index.php';
-        //       $PLUGIN_HOOKS['submenu_entry']['example']['options']['optionname']['links'][__s('Test link', 'example')] = '/plugins/example/index.php';
+        //       $PLUGIN_HOOKS['submenu_entry']['glpigeneral']['options']['optionname']['title'] = "Search";
+        //       $PLUGIN_HOOKS['submenu_entry']['glpigeneral']['options']['optionname']['page']  = '/plugins/example/front/example.php';
+        //       $PLUGIN_HOOKS['submenu_entry']['glpigeneral']['options']['optionname']['links']['search'] = '/plugins/example/front/example.php';
+        //       $PLUGIN_HOOKS['submenu_entry']['glpigeneral']['options']['optionname']['links']['add']    = '/plugins/example/front/example.form.php';
+        //       $PLUGIN_HOOKS['submenu_entry']['glpigeneral']['options']['optionname']['links']['config'] = '/plugins/example/index.php';
+        //       $PLUGIN_HOOKS['submenu_entry']['glpigeneral']['options']['optionname']['links']["<img  src='".$CFG_GLPI["root_doc"]."/pics/menu_showall.png' title='".__s('Show all')."' alt='".__s('Show all')."'>"] = '/plugins/example/index.php';
+        //       $PLUGIN_HOOKS['submenu_entry']['glpigeneral']['options']['optionname']['links'][__s('Test link', 'glpigeneral')] = '/plugins/example/index.php';
 
-        $PLUGIN_HOOKS[Hooks::HELPDESK_MENU_ENTRY]['example']      = true;
-        $PLUGIN_HOOKS[Hooks::HELPDESK_MENU_ENTRY_ICON]['example'] = 'fas fa-puzzle-piece';
+        $PLUGIN_HOOKS[Hooks::HELPDESK_MENU_ENTRY]['glpigeneral']      = true;
+        $PLUGIN_HOOKS[Hooks::HELPDESK_MENU_ENTRY_ICON]['glpigeneral'] = 'fas fa-puzzle-piece';
     }
 
     // Config page
     if (Session::haveRight('config', UPDATE)) {
-        $PLUGIN_HOOKS['config_page']['example'] = 'front/config.php';
+        $PLUGIN_HOOKS['config_page']['glpigeneral'] = 'front/config.php';
     }
 
     // Init session
-    //$PLUGIN_HOOKS['init_session']['example'] = 'plugin_init_session_example';
+    //$PLUGIN_HOOKS['init_session']['glpigeneral'] = 'plugin_init_session_example';
     // Change profile
-    $PLUGIN_HOOKS['change_profile']['example'] = 'plugin_change_profile_example';
+    $PLUGIN_HOOKS['change_profile']['glpigeneral'] = 'plugin_change_profile_glpigeneral';
     // Change entity
-    //$PLUGIN_HOOKS['change_entity']['example'] = 'plugin_change_entity_example';
+    //$PLUGIN_HOOKS['change_entity']['glpigeneral'] = 'plugin_change_entity_example';
 
     // Item action event // See define.php for defined ITEM_TYPE
-    $PLUGIN_HOOKS[Hooks::PRE_ITEM_UPDATE]['example'] = [Computer::class => 'plugin_pre_item_update_example'];
-    $PLUGIN_HOOKS[hooks::ITEM_UPDATE]['example']     = [Computer::class => 'plugin_item_update_example'];
+    $PLUGIN_HOOKS[Hooks::PRE_ITEM_UPDATE]['glpigeneral'] = [Computer::class => 'plugin_pre_item_update_glpigeneral'];
+    $PLUGIN_HOOKS[hooks::ITEM_UPDATE]['glpigeneral']     = [Computer::class => 'plugin_item_update_glpigeneral'];
 
-    $PLUGIN_HOOKS[Hooks::ITEM_EMPTY]['example'] = [Computer::class => 'plugin_item_empty_example'];
+    $PLUGIN_HOOKS[Hooks::ITEM_EMPTY]['glpigeneral'] = [Computer::class => 'plugin_item_empty_glpigeneral'];
 
     // Restrict right
-    $PLUGIN_HOOKS[Hooks::ITEM_CAN]['example']     = [Computer::class => [Example::class, 'item_can']];
-    $PLUGIN_HOOKS['add_default_where']['example'] = [Computer::class => [Example::class, 'add_default_where']];
+    $PLUGIN_HOOKS[Hooks::ITEM_CAN]['glpigeneral']     = [Computer::class => [Example::class, 'item_can']];
+    $PLUGIN_HOOKS['add_default_where']['glpigeneral'] = [Computer::class => [Example::class, 'add_default_where']];
 
     // Example using a method in class
-    $PLUGIN_HOOKS[Hooks::PRE_ITEM_ADD]['example'] = [Computer::class => [Example::class,
+    $PLUGIN_HOOKS[Hooks::PRE_ITEM_ADD]['glpigeneral'] = [Computer::class => [Example::class,
         'pre_item_add_computer']];
-    $PLUGIN_HOOKS[Hooks::POST_PREPAREADD]['example'] = [Computer::class => [Example::class,
+    $PLUGIN_HOOKS[Hooks::POST_PREPAREADD]['glpigeneral'] = [Computer::class => [Example::class,
         'post_prepareadd_computer']];
-    $PLUGIN_HOOKS[Hooks::ITEM_ADD]['example'] = [Computer::class => [Example::class,
+    $PLUGIN_HOOKS[Hooks::ITEM_ADD]['glpigeneral'] = [Computer::class => [Example::class,
         'item_add_computer']];
 
-    $PLUGIN_HOOKS[Hooks::PRE_ITEM_DELETE]['example'] = [Computer::class => 'plugin_pre_item_delete_example'];
-    $PLUGIN_HOOKS[Hooks::ITEM_DELETE]['example']     = [Computer::class => 'plugin_item_delete_example'];
+    $PLUGIN_HOOKS[Hooks::PRE_ITEM_DELETE]['glpigeneral'] = [Computer::class => 'plugin_pre_item_delete_glpigeneral'];
+    $PLUGIN_HOOKS[Hooks::ITEM_DELETE]['glpigeneral']     = [Computer::class => 'plugin_item_delete_glpigeneral'];
 
     // Example using the same function
-    $PLUGIN_HOOKS[Hooks::PRE_ITEM_PURGE]['example'] = [Computer::class => 'plugin_pre_item_purge_example',
-        'Phone'                                                        => 'plugin_pre_item_purge_example'];
-    $PLUGIN_HOOKS[Hooks::ITEM_PURGE]['example'] = [Computer::class => 'plugin_item_purge_example',
-        'Phone'                                                    => 'plugin_item_purge_example'];
+    $PLUGIN_HOOKS[Hooks::PRE_ITEM_PURGE]['glpigeneral'] = [Computer::class => 'plugin_pre_item_purge_glpigeneral',
+        'Phone'                                                        => 'plugin_pre_item_purge_glpigeneral'];
+    $PLUGIN_HOOKS[Hooks::ITEM_PURGE]['glpigeneral'] = [Computer::class => 'plugin_item_purge_glpigeneral',
+        'Phone'                                                    => 'plugin_item_purge_glpigeneral'];
 
     // Example with 2 different functions
-    $PLUGIN_HOOKS[Hooks::PRE_ITEM_RESTORE]['example'] = [Computer::class => 'plugin_pre_item_restore_example',
-        'Phone'                                                          => 'plugin_pre_item_restore_example2'];
-    $PLUGIN_HOOKS[Hooks::ITEM_RESTORE]['example'] = [Computer::class => 'plugin_item_restore_example'];
+    $PLUGIN_HOOKS[Hooks::PRE_ITEM_RESTORE]['glpigeneral'] = [Computer::class => 'plugin_pre_item_restore_glpigeneral',
+        'Phone'                                                          => 'plugin_pre_item_restore_glpigeneral2'];
+    $PLUGIN_HOOKS[Hooks::ITEM_RESTORE]['glpigeneral'] = [Computer::class => 'plugin_item_restore_glpigeneral'];
 
     // Add event to GLPI core itemtype, event will be raised by the plugin.
-    // See plugin_example_uninstall for cleanup of notification
-    $PLUGIN_HOOKS[Hooks::ITEM_GET_EVENTS]['example']
-                                  = ['NotificationTargetTicket' => 'plugin_example_get_events'];
+    // See plugin_glpigeneral_uninstall for cleanup of notification
+    $PLUGIN_HOOKS[Hooks::ITEM_GET_EVENTS]['glpigeneral']
+                                  = ['NotificationTargetTicket' => 'plugin_glpigeneral_get_events'];
 
     // Add datas to GLPI core itemtype for notifications template.
-    $PLUGIN_HOOKS[Hooks::ITEM_GET_DATA]['example']
-                                  = ['NotificationTargetTicket' => 'plugin_example_get_datas'];
+    $PLUGIN_HOOKS[Hooks::ITEM_GET_DATA]['glpigeneral']
+                                  = ['NotificationTargetTicket' => 'plugin_glpigeneral_get_datas'];
 
-    $PLUGIN_HOOKS[Hooks::ITEM_TRANSFER]['example'] = 'plugin_item_transfer_example';
+    $PLUGIN_HOOKS[Hooks::ITEM_TRANSFER]['glpigeneral'] = 'plugin_item_transfer_glpigeneral';
 
     // function to populate planning
     // No more used since GLPI 0.84
-    // $PLUGIN_HOOKS['planning_populate']['example'] = 'plugin_planning_populate_example';
+    // $PLUGIN_HOOKS['planning_populate']['glpigeneral'] = 'plugin_planning_populate_example';
     // Use instead : add class to planning types and define populatePlanning in class
     $CFG_GLPI['planning_types'][] = Example::class;
 
     //function to display planning items
     // No more used sinc GLPi 0.84
-    // $PLUGIN_HOOKS['display_planning']['example'] = 'plugin_display_planning_example';
+    // $PLUGIN_HOOKS['display_planning']['glpigeneral'] = 'plugin_display_planning_example';
     // Use instead : displayPlanningItem of the specific itemtype
 
     // Massive Action definition
-    $PLUGIN_HOOKS['use_massive_action']['example'] = 1;
+    $PLUGIN_HOOKS['use_massive_action']['glpigeneral'] = 1;
 
-    $PLUGIN_HOOKS['assign_to_ticket']['example'] = 1;
+    $PLUGIN_HOOKS['assign_to_ticket']['glpigeneral'] = 1;
 
     // Add specific files to add to the header : javascript or css
-    $PLUGIN_HOOKS[Hooks::ADD_JAVASCRIPT]['example'] = 'example.js';
-    $PLUGIN_HOOKS[Hooks::ADD_CSS]['example']        = 'example.css';
+    $PLUGIN_HOOKS[Hooks::ADD_JAVASCRIPT]['glpigeneral'] = 'glpigeneral.js';
+    $PLUGIN_HOOKS[Hooks::ADD_CSS]['glpigeneral']        = 'glpigeneral.css';
 
     // Add specific tags to the header
-    $PLUGIN_HOOKS[Hooks::ADD_HEADER_TAG]['example'] = [
+    $PLUGIN_HOOKS[Hooks::ADD_HEADER_TAG]['glpigeneral'] = [
         [
             'tag'        => 'meta',
             'properties' => [
@@ -210,12 +210,12 @@ function plugin_init_example()
     ];
 
     // Add specific files to add to the header into anonymous page : javascript or css
-    $PLUGIN_HOOKS[Hooks::ADD_CSS_ANONYMOUS_PAGE]['example']               = 'example_anonymous.css';
-    $PLUGIN_HOOKS[Hooks::ADD_JAVASCRIPT_MODULE_ANONYMOUS_PAGE]['example'] = 'mymodule_anonymous.js';
-    $PLUGIN_HOOKS[Hooks::ADD_JAVASCRIPT_ANONYMOUS_PAGE]['example']        = 'example_anonymous.js';
+    $PLUGIN_HOOKS[Hooks::ADD_CSS_ANONYMOUS_PAGE]['glpigeneral']               = 'glpigeneral_anonymous.css';
+    $PLUGIN_HOOKS[Hooks::ADD_JAVASCRIPT_MODULE_ANONYMOUS_PAGE]['glpigeneral'] = 'mymodule_anonymous.js';
+    $PLUGIN_HOOKS[Hooks::ADD_JAVASCRIPT_ANONYMOUS_PAGE]['glpigeneral']        = 'glpigeneral_anonymous.js';
 
     // Add specific tags to the header into anonymous page
-    $PLUGIN_HOOKS[Hooks::ADD_HEADER_TAG_ANONYMOUS_PAGE]['example'] = [
+    $PLUGIN_HOOKS[Hooks::ADD_HEADER_TAG_ANONYMOUS_PAGE]['glpigeneral'] = [
         [
             'tag'        => 'meta',
             'properties' => [
@@ -235,66 +235,66 @@ function plugin_init_example()
     ];
 
     // request more attributes from ldap
-    //$PLUGIN_HOOKS['retrieve_more_field_from_ldap']['example']="plugin_retrieve_more_field_from_ldap_example";
+    //$PLUGIN_HOOKS['retrieve_more_field_from_ldap']['glpigeneral']="plugin_retrieve_more_field_from_ldap_glpigeneral";
 
     // Retrieve others datas from LDAP
-    //$PLUGIN_HOOKS['retrieve_more_data_from_ldap']['example']="plugin_retrieve_more_data_from_ldap_example";
+    //$PLUGIN_HOOKS['retrieve_more_data_from_ldap']['glpigeneral']="plugin_retrieve_more_data_from_ldap_example";
 
     // Reports
-    $PLUGIN_HOOKS['reports']['example'] = ['report.php' => 'New Report',
+    $PLUGIN_HOOKS['reports']['glpigeneral'] = ['report.php' => 'New Report',
         'report.php?other'                              => 'New Report 2'];
 
     // Stats
-    $PLUGIN_HOOKS['stats']['example'] = ['stat.php' => 'New stat',
+    $PLUGIN_HOOKS['stats']['glpigeneral'] = ['stat.php' => 'New stat',
         'stat.php?other'                            => 'New stats 2', ];
 
-    $PLUGIN_HOOKS[Hooks::POST_INIT]['example'] = 'plugin_example_postinit';
+    $PLUGIN_HOOKS[Hooks::POST_INIT]['glpigeneral'] = 'plugin_glpigeneral_postinit';
 
-    $PLUGIN_HOOKS['status']['example'] = 'plugin_example_Status';
+    $PLUGIN_HOOKS['status']['glpigeneral'] = 'plugin_glpigeneral_Status';
 
-    $PLUGIN_HOOKS[Hooks::DISPLAY_CENTRAL]['example'] = 'plugin_example_display_central';
-    $PLUGIN_HOOKS[Hooks::DISPLAY_LOGIN]['example']   = 'plugin_example_display_login';
-    $PLUGIN_HOOKS[Hooks::INFOCOM]['example']         = 'plugin_example_infocom_hook';
+    $PLUGIN_HOOKS[Hooks::DISPLAY_CENTRAL]['glpigeneral'] = 'plugin_glpigeneral_display_central';
+    $PLUGIN_HOOKS[Hooks::DISPLAY_LOGIN]['glpigeneral']   = 'plugin_glpigeneral_display_login';
+    $PLUGIN_HOOKS[Hooks::INFOCOM]['glpigeneral']         = 'plugin_glpigeneral_infocom_hook';
 
     // pre_show and post_show for tabs and items,
-    // see GlpiPlugin\Example\Showtabitem class for implementation explanations
-    $PLUGIN_HOOKS[Hooks::PRE_SHOW_TAB]['example']   = [Showtabitem::class, 'pre_show_tab'];
-    $PLUGIN_HOOKS[Hooks::POST_SHOW_TAB]['example']  = [Showtabitem::class, 'post_show_tab'];
-    $PLUGIN_HOOKS[Hooks::PRE_SHOW_ITEM]['example']  = [Showtabitem::class, 'pre_show_item'];
-    $PLUGIN_HOOKS[Hooks::POST_SHOW_ITEM]['example'] = [Showtabitem::class, 'post_show_item'];
+    // see GlpiPlugin\Glpigeneral\Showtabitem class for implementation explanations
+    $PLUGIN_HOOKS[Hooks::PRE_SHOW_TAB]['glpigeneral']   = [Showtabitem::class, 'pre_show_tab'];
+    $PLUGIN_HOOKS[Hooks::POST_SHOW_TAB]['glpigeneral']  = [Showtabitem::class, 'post_show_tab'];
+    $PLUGIN_HOOKS[Hooks::PRE_SHOW_ITEM]['glpigeneral']  = [Showtabitem::class, 'pre_show_item'];
+    $PLUGIN_HOOKS[Hooks::POST_SHOW_ITEM]['glpigeneral'] = [Showtabitem::class, 'post_show_item'];
 
-    $PLUGIN_HOOKS[Hooks::PRE_ITEM_FORM]['example']  = [ItemForm::class, 'preItemForm'];
-    $PLUGIN_HOOKS[Hooks::POST_ITEM_FORM]['example'] = [ItemForm::class, 'postItemForm'];
+    $PLUGIN_HOOKS[Hooks::PRE_ITEM_FORM]['glpigeneral']  = [ItemForm::class, 'preItemForm'];
+    $PLUGIN_HOOKS[Hooks::POST_ITEM_FORM]['glpigeneral'] = [ItemForm::class, 'postItemForm'];
 
-    $PLUGIN_HOOKS[Hooks::PRE_ITIL_INFO_SECTION]['example']  = [ItemForm::class, 'preSection'];
-    $PLUGIN_HOOKS[Hooks::POST_ITIL_INFO_SECTION]['example'] = [ItemForm::class, 'postSection'];
+    $PLUGIN_HOOKS[Hooks::PRE_ITIL_INFO_SECTION]['glpigeneral']  = [ItemForm::class, 'preSection'];
+    $PLUGIN_HOOKS[Hooks::POST_ITIL_INFO_SECTION]['glpigeneral'] = [ItemForm::class, 'postSection'];
 
     // Add new actions to timeline
-    $PLUGIN_HOOKS[Hooks::TIMELINE_ACTIONS]['example'] = [
+    $PLUGIN_HOOKS[Hooks::TIMELINE_ACTIONS]['glpigeneral'] = [
         ItemForm::class, 'timelineActions',
     ];
 
     // declare this plugin as an import plugin for Computer itemtype
-    $PLUGIN_HOOKS['import_item']['example'] = [Computer::class => ['Plugin']];
+    $PLUGIN_HOOKS['import_item']['glpigeneral'] = [Computer::class => ['Plugin']];
 
     // add additional informations on Computer::showForm
-    $PLUGIN_HOOKS[Hooks::AUTOINVENTORY_INFORMATION]['example'] = [
+    $PLUGIN_HOOKS[Hooks::AUTOINVENTORY_INFORMATION]['glpigeneral'] = [
         Computer::class => [Computer::class, 'showInfo'],
     ];
 
-    $PLUGIN_HOOKS[Hooks::FILTER_ACTORS]['example'] = 'plugin_example_filter_actors';
+    $PLUGIN_HOOKS[Hooks::FILTER_ACTORS]['glpigeneral'] = 'plugin_glpigeneral_filter_actors';
 
     // add new cards to dashboard grid
-    $PLUGIN_HOOKS['dashboard_types']['example'] = [Example::class, 'dashboardTypes'];
-    $PLUGIN_HOOKS['dashboard_cards']['example'] = [Example::class, 'dashboardCards'];
+    $PLUGIN_HOOKS['dashboard_types']['glpigeneral'] = [Example::class, 'dashboardTypes'];
+    $PLUGIN_HOOKS['dashboard_cards']['glpigeneral'] = [Example::class, 'dashboardCards'];
 
     // Dashboard filter
-    $PLUGIN_HOOKS[Hooks::DASHBOARD_FILTERS]['example'] = [
+    $PLUGIN_HOOKS[Hooks::DASHBOARD_FILTERS]['glpigeneral'] = [
         ComputerModelFilter::class,
     ];
 
     // Icon in the impact analysis
-    $PLUGIN_HOOKS[Hooks::SET_ITEM_IMPACT_ICON]['example'] = 'plugin_example_set_impact_icon';
+    $PLUGIN_HOOKS[Hooks::SET_ITEM_IMPACT_ICON]['glpigeneral'] = 'plugin_glpigeneral_set_impact_icon';
 }
 
 
@@ -308,14 +308,14 @@ function plugin_version_example()
 {
     return [
         'name'         => 'Plugin Example',
-        'version'      => PLUGIN_EXAMPLE_VERSION,
+        'version'      => PLUGIN_GLPIGENERAL_VERSION,
         'author'       => 'Example plugin team',
         'license'      => 'GPLv2+',
         'homepage'     => 'https://github.com/pluginsGLPI/example',
         'requirements' => [
             'glpi' => [
-                'min' => PLUGIN_EXAMPLE_MIN_GLPI,
-                'max' => PLUGIN_EXAMPLE_MAX_GLPI,
+                'min' => PLUGIN_GLPIGENERAL_MIN_GLPI,
+                'max' => PLUGIN_GLPIGENERAL_MAX_GLPI,
             ],
         ],
     ];
@@ -328,7 +328,7 @@ function plugin_version_example()
  *
  * @return boolean
  */
-function plugin_example_check_prerequisites()
+function plugin_glpigeneral_check_prerequisites()
 {
     return !false;
 }
@@ -340,14 +340,14 @@ function plugin_example_check_prerequisites()
  *
  * @return boolean
  */
-function plugin_example_check_config($verbose = false)
+function plugin_glpigeneral_check_config($verbose = false)
 {
     if (true) { // Your configuration check
         return true;
     }
 
     if ($verbose) {
-        echo __s('Installed / not configured', 'example');
+        echo __s('Installed / not configured', 'glpigeneral');
     }
     return false;
 }

@@ -33,12 +33,12 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-use GlpiPlugin\Example\Dropdown;
+use GlpiPlugin\Glpigeneral\Dropdown;
 
 include(__DIR__ . '/../bootstrap.php');
 Session::checkLoginUser();
 
-Plugin::load('example', true);
+Plugin::load('glpigeneral', true);
 
 $dropdown = new Dropdown();
 include(GLPI_ROOT . '/front/dropdown.common.form.php');

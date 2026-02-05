@@ -28,7 +28,7 @@
  * -------------------------------------------------------------------------
  */
 
-namespace GlpiPlugin\Example;
+namespace GlpiPlugin\Glpigeneral;
 
 use CommonDBTM;
 use CommonGLPI;
@@ -41,7 +41,11 @@ class About extends CommonDBTM
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
         if ($item instanceof \Profile && $item->getField('id')) {
-            return self::createTabEntry(__s('About'));
+            // Check if the feature is enabled in plugin configuration
+            $config = GlpiConfig::getConfigurationValues('plugin:Glpigeneral');
+            if (isset($config['show_server_info']) && $config['show_server_info']) {
+                return self::createTabEntry(__s('Server Information', 'glpigeneral'));
+            }
         }
 
         return '';
@@ -90,7 +94,7 @@ class About extends CommonDBTM
         echo "<td class='b'>" . __s('Plugin Version') . "</td>";
         echo "<td>";
         $plugin = new \Plugin();
-        if ($plugin->getFromDBbyDir('example')) {
+        if ($plugin->getFromDBbyDir('glpigeneral')) {
             echo htmlspecialchars($plugin->fields['version']);
         }
         echo "</td>";

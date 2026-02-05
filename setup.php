@@ -28,6 +28,7 @@
  * -------------------------------------------------------------------------
  */
 use Glpi\Plugin\Hooks;
+use GlpiPlugin\Example\About;
 use GlpiPlugin\Example\Computer;
 use GlpiPlugin\Example\Config;
 use GlpiPlugin\Example\DeviceCamera;
@@ -93,6 +94,7 @@ function plugin_init_example()
     }
     // Display a menu entry ?
     Plugin::registerClass(Profile::class, ['addtabon' => ['Profile']]);
+    Plugin::registerClass(About::class, ['addtabon' => ['Profile']]);
     if (Example::canView()) { // Right set in change_profile hook
         $PLUGIN_HOOKS['menu_toadd']['example'] = ['plugins' => Example::class,
             'tools'                                         => Example::class];

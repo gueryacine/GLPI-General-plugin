@@ -37,7 +37,7 @@
 //header("Location:../../central.php");
 
 // Entry menu case
-include(__DIR__ . '/../../../inc/includes.php');
+include(__DIR__ . '/../bootstrap.php');
 
 Session::checkRight('config', UPDATE);
 

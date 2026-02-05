@@ -33,7 +33,7 @@
 // Purpose of file:
 // ----------------------------------------------------------------------
 
-include(__DIR__ . '/../../../inc/includes.php');
+include(__DIR__ . '/../bootstrap.php');
 Session::checkLoginUser();
 
 $dropdown = new DeviceCamera();

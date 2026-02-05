@@ -115,9 +115,10 @@ function plugin_init_example()
     }
 
     // Config page
-    if (Session::haveRight('config', UPDATE)) {
-        $PLUGIN_HOOKS['config_page']['example'] = 'front/config.php';
-    }
+    // Disabled to avoid path issues - About tab still works
+    // if (Session::haveRight('config', UPDATE)) {
+    //     $PLUGIN_HOOKS['config_page']['example'] = 'front/config.php';
+    // }
 
     // Init session
     //$PLUGIN_HOOKS['init_session']['example'] = 'plugin_init_session_example';

@@ -35,7 +35,7 @@
 
 use GlpiPlugin\Example\RuleTestCollection;
 
-include(__DIR__ . '/../../../inc/includes.php');
+include(__DIR__ . '/../bootstrap.php');
 Session::checkLoginUser();
 
 $rulecollection = new RuleTestCollection();

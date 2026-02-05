@@ -28,16 +28,41 @@
  * -------------------------------------------------------------------------
  */
 
-// ----------------------------------------------------------------------
-// Original Author of file: Walid Nouh
-// Purpose of file:
-// ----------------------------------------------------------------------
+/**
+ * Bootstrap file to locate and include GLPI's main includes file
+ * This works regardless of where the plugin is physically located
+ */
 
-use GlpiPlugin\Example\RuleTestCollection;
+// Check if GLPI_ROOT is already defined (when called from GLPI)
+if (defined('GLPI_ROOT')) {
+    include_once GLPI_ROOT . '/inc/includes.php';
+    return;
+}
 
-include(__DIR__ . '/../bootstrap.php');
-Session::checkLoginUser();
+// Try to find GLPI root using common paths
+$possible_paths = [
+    // Standard relative path (when plugin is in GLPI's plugins directory)
+    __DIR__ . '/../../../inc/includes.php',
 
-$rulecollection = new RuleTestCollection();
+    // Common installation paths
+    '/srv/glpi/glpi/inc/includes.php',
+    '/var/www/html/glpi/inc/includes.php',
+    '/usr/share/glpi/inc/includes.php',
+    '/opt/glpi/inc/includes.php',
+];
 
-include(GLPI_ROOT . '/front/rule.common.form.php');
+// Try each path
+foreach ($possible_paths as $path) {
+    $resolved_path = realpath($path);
+    if ($resolved_path && file_exists($resolved_path)) {
+        include_once $resolved_path;
+        return;
+    }
+}
+
+// If we get here, we couldn't find GLPI
+die(
+    'ERROR: Could not locate GLPI installation. ' .
+    'Please ensure this plugin is installed in GLPI\'s plugins directory, ' .
+    'or update the $possible_paths array in ' . __FILE__
+);
